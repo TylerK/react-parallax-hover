@@ -1,0 +1,11 @@
+{
+  "name": "parallax-hover",
+  "version": "0.0.1",
+  "description": "A pointer driven hover effect that rotates images in place with subtle parallax effects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
