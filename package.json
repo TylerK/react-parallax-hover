@@ -1,27 +1,46 @@
 {
   "name": "parallax-hover",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TylerK/react-parallax-hover.git"
+  },
   "description": "A pointer driven hover effect that rotates images in place with subtle parallax effects",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf ./dist",
-    "webpack-dev": "webpack-dev-server --hot --progress --colors",
-    "start": "npm run clean && npm run webpack-dev",
+    "clean": "rm -rf ./dist && mkdir ./dist",
+    "watch": "webpack-dev-server --hot --colors",
+    "start": "npm run clean && npm run watch",
+    "css": "sass ./src/index.scss ./dist/index.css",
+    "build": "npm run clean && babel ./src/parallax-hover.jsx -o ./dist/index.js && npm run css",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^5.8.33",
+    "babel": "^6.0.14",
+    "babel-core": "^6.0.14",
     "babel-eslint": "^4.1.3",
-    "babel-loader": "^5.3.3",
+    "babel-loader": "^6.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.0.14",
+    "babel-preset-es2015": "^6.0.14",
+    "babel-preset-react": "^6.0.14",
+    "css-loader": "^0.21.0",
     "eslint": "^1.7.3",
     "eslint-config-airbnb": "^0.1.0",
+    "eslint-plugin-import": "^0.8.1",
     "eslint-plugin-react": "^3.6.3",
+    "node-sass": "^3.4.1",
     "react": "^0.14.1",
     "react-dom": "^0.14.1",
     "react-hot-loader": "^1.3.0",
+    "sass-loader": "^3.1.1",
+    "style-loader": "^0.13.0",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.1"
+  },
+  "dependencies": {
+    "react-stockcharts": "^0.2.6"
   }
 }

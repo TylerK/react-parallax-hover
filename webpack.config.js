@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: [
@@ -12,13 +13,33 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-      { test: /\.css$/, loader: 'style!css' },
-      { test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192'}
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass'
+      }
     ]
   },
+  externals: [
+    {
+      react: {
+        root: 'React', amd: 'react', commonjs: 'react', commonjs2: 'react'
+      }
+    }
+  ],
   plugins: [
     new webpack.NoErrorsPlugin()
-  ]
+  ],
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "./src")]
+  }
 };
