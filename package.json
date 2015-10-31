@@ -12,7 +12,7 @@
     "watch": "webpack-dev-server --hot --colors",
     "start": "npm run clean && npm run watch",
     "css": "sass ./src/index.scss ./dist/index.css",
-    "build": "npm run clean && babel ./src/parallax-hover.jsx -o ./dist/index.js && npm run css",
+    "build": "npm run clean && babel ./src/parallax-hover.js -o ./dist/index.js && npm run css",
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

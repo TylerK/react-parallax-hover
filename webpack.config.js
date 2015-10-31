@@ -40,6 +40,6 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
   sassLoader: {
-    includePaths: [path.resolve(__dirname, "./src")]
+    includePaths: [path.resolve(__dirname, './src')]
   }
 };
