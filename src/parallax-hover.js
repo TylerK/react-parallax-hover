@@ -109,26 +109,28 @@ export default class ParallaxHover extends React.Component {
     const st = this.state;
 
     if (!Array.isArray(children)) {
-      let styles = this.__buildTransformStrings(st.rotateX, st.rotateY, st.scale);
+      const styles = this.__buildTransformStrings(st.rotateX, st.rotateY, st.scale);
       console.log(this.__buildTransformStrings(st.rotateX, st.rotateY, st.scale));
       return <div style={styles} className='ph-layer'>{children}</div>;
     }
 
     return children.map((layer, key) => {
-      let num = key + 1;
-      let rotateX = Math.floor(st.rotateX / num);
-      let rotateY = Math.floor(st.rotateY / num);
+      const num = key + 1;
+      const rotateX = Math.floor(st.rotateX / num);
+      const rotateY = Math.floor(st.rotateY / num);
       let styles = this.__buildTransformStrings(rotateX, rotateY, st.scale);
+      let textClass;
 
       if (layer.ref === 'text') {
-        let shadow = {
+        textClass = 'ph-text';
+        const shadow = {
           textShadow: `${rotateY}px ${rotateX}px 10px rgba(0, 0, 0, 0.5)`
         };
 
         styles = Object.assign({}, shadow, styles);
       }
 
-      return <div style={styles} className='ph-layer' key={key}>{layer}</div>;
+      return <div style={styles} className={`ph-layer ${textClass}`} key={key}>{layer}</div>;
     });
   }
 
