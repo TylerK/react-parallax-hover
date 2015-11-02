@@ -13,7 +13,6 @@ cd react-parallax-hover
 npm install
 npm start
 ```
-TODO: Github pages with working demo(s)
 
 ### Usage
 ```
@@ -26,5 +25,7 @@ import ParallaxHover from 'react-parallax-hover';
 ```
 
 ### TODOs
-- [ ] Robust configuration
+- [ ] More robust configuration
 - [ ] Touch event handling
+- [ ] Github pages site with examples and demo's
+- [ ] Animated gif hotness for this readme
