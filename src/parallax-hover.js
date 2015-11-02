@@ -85,19 +85,6 @@ export default class ParallaxHover extends React.Component {
     const shadowSize = 120;
     const alpha = this.__calculateAlphaFromCenter(distanceFromCenter);
 
-    // console.log(`
-    //   angle:   ${angleDeg}
-    //   pageX:   ${pageX}
-    //   pageY:   ${pageY}
-    //   offsetX: ${offsetX}
-    //   offsetY: ${offsetY}
-    //   deltaX: ${deltaX}
-    //   deltaY: ${deltaY}
-    //   rotateX: ${rotateX}
-    //   rotateY: ${rotateY}
-    //   dfc: ${distanceFromCenter}
-    // `);
-
     this.__buildState(rotateX, rotateY, shadowMovement, shadowSize, config.scale, angleDeg, alpha);
   }
 
