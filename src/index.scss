@@ -1,5 +1,14 @@
 .ph-wrapper {
   position: relative;
+  transition: all 0.3s ease-out;
+  margin: 0;
+
+  .ph-shadow,
+  .ph-layers,
+  .ph-layer,
+  .ph-lighting {
+    transition: all 0.3s ease-out;
+  }
 
   .ph-shadow,
   .ph-layers,
@@ -12,20 +21,6 @@
     left: 0;
     bottom: 0;
     right: 0;
-    perspective: 1000px;
-    transition: all 0.2s ease-out;
-  }
-
-  .ph-shadow {
-    // transition: none !important;
-  }
-
-  .ph-shadow,
-  .ph-layer,
-  .ph-lighting,
-  .ph-heading {
-    transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
   }
 
   .ph-text {
@@ -37,8 +32,9 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 3rem;
+    font-size: 5rem;
     color: #fff;
+    font-weight: 300;
   }
 
   .ph-shadow {
@@ -46,7 +42,6 @@
     width: 90%;
     left: 5%;
     top: 5%;
-    transition: all 0.2s ease-out;
     background: none;
   }
 

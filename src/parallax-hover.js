@@ -1,7 +1,7 @@
 import React from 'react';
 
 const config = {
-  scale: 1.05, // How large to scale the item: 1.00 -> 1.10~
+  scale: 1.03, // How large to scale the item: 1.00 -> 1.10~
   rotation: 0.3, // Rotation modifier: 0.1 (more) -> 0.5 (less)
   alpha: 0.4, // Alpha channel modifer: 1.01 -> 1.1~
   shadow: 8 // How much the shadow moves
@@ -21,7 +21,7 @@ export default class ParallaxHover extends React.Component {
     this.state = {
       rotateX: 0,
       rotateY: 0,
-      shadowMovement: 0,
+      shadowMovement: 20,
       shadowSize: 50,
       scale: 1,
       angle: 0,
@@ -81,8 +81,8 @@ export default class ParallaxHover extends React.Component {
     const angleRaw = angleRad * 180 / Math.PI - 90;
     const angleDeg = angleRaw < 0 ? angleRaw + 360 : angleRaw;
     const distanceFromCenter = this.__calculateDistance(bounds, nativeEvent.offsetX, nativeEvent.offsetY);
-    const shadowMovement = (nativeEvent.offsetY - bounds.top) * 0.1;
-    const shadowSize = distanceFromCenter / 3;
+    const shadowMovement = centerY * 0.25;
+    const shadowSize = 120;
     const alpha = this.__calculateAlphaFromCenter(distanceFromCenter);
 
     // console.log(`
@@ -102,7 +102,7 @@ export default class ParallaxHover extends React.Component {
   }
 
   __handleMouseLeave() {
-    this.__buildState(0, 0, 0, 50, 1, 0, 0);
+    this.__buildState(0, 0, 20, 50, 1, 0, 0);
   }
 
   __renderChildren(children) {
@@ -116,14 +116,13 @@ export default class ParallaxHover extends React.Component {
 
     return children.map((layer, key) => {
       let num = key + 1;
-      let rotateX = st.rotateX / num;
-      let rotateY = st.rotateY / num;
-      let movement = (st.movement * num) * 0.1;
+      let rotateX = Math.floor(st.rotateX / num);
+      let rotateY = Math.floor(st.rotateY / num);
       let styles = this.__buildTransformStrings(rotateX, rotateY, st.scale);
 
       if (layer.ref === 'text') {
         let shadow = {
-          textShadow: `${movement}px ${movement}px 20px rgba(0, 0, 0, 0.5)`
+          textShadow: `${rotateY}px ${rotateX}px 10px rgba(0, 0, 0, 0.5)`
         };
 
         styles = Object.assign({}, shadow, styles);
@@ -135,16 +134,15 @@ export default class ParallaxHover extends React.Component {
 
   render() {
     const st = this.state;
-
-    const stylesWrapper = {
-      width: this.props.width,
-      height: this.props.height
-    };
-
     const baseTransforms = this.__buildTransformStrings(st.rotateX, st.rotateY, st.scale);
 
+    const stylesWrapper = Object.assign({}, baseTransforms, {
+      width: this.props.width,
+      height: this.props.height
+    });
+
     const stylesShadow = Object.assign({}, baseTransforms, {
-      boxShadow: `0px ${st.shadowMovement}px ${st.shadowSize}px rgba(0, 0, 0, .9)`
+      boxShadow: `0px ${st.shadowMovement}px ${st.shadowSize}px rgba(0, 0, 0, 0.6)`
     });
 
     const stylesLighting = Object.assign({}, baseTransforms, {
@@ -152,11 +150,15 @@ export default class ParallaxHover extends React.Component {
     });
 
     return (
-      <figure ref='wrapper' className='ph-wrapper' style={stylesWrapper} onMouseMove={this.__handleMouseMove.bind(this)} onMouseLeave={this.__handleMouseLeave.bind(this)}>
-        <div className='ph-shadow' style={stylesShadow} />
-        {this.__renderChildren(this.props.children)}
-        <div className='ph-lighting' style={stylesLighting} />
-      </figure>
+      <div style={{ transformStyle: 'preserve-3d'}}>
+        <figure ref='wrapper' className='ph-wrapper' style={stylesWrapper} onMouseMove={this.__handleMouseMove.bind(this)} onMouseLeave={this.__handleMouseLeave.bind(this)}>
+          <div className='ph-shadow' style={stylesShadow} />
+          <div className='ph-layers'>
+            {this.__renderChildren(this.props.children)}
+          </div>
+          <div className='ph-lighting' style={stylesLighting} />
+        </figure>
+      </div>
     );
   }
 }
