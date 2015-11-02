@@ -24,3 +24,7 @@ import ParallaxHover from 'react-parallax-hover';
     <h1 ref='text'>Some text</h1>
 </ParallaxHover>
 ```
+
+### TODOs
+- [ ] Robust configuration
+- [ ] Touch event handling
