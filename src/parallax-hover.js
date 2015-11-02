@@ -124,7 +124,7 @@ export default class ParallaxHover extends React.Component {
       if (layer.ref === 'text') {
         textClass = 'ph-text';
         const shadow = {
-          textShadow: `${rotateY}px ${rotateX}px 10px rgba(0, 0, 0, 0.5)`
+          textShadow: `${rotateY * 0.5}px ${rotateX * 0.5}px 10px rgba(0, 0, 0, 0.5)`
         };
 
         styles = Object.assign({}, shadow, styles);
