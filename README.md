@@ -17,6 +17,7 @@ npm start
 ### Usage
 ```
 import ParallaxHover from 'react-parallax-hover';
+import 'react-parallax-hover/index.css';
 
 <ParallaxHover width='500' height='500'>
     <img ref='image' src='...' />
