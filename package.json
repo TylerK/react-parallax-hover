@@ -11,8 +11,8 @@
     "clean": "rm -rf ./dist && mkdir ./dist",
     "watch": "webpack-dev-server --hot --colors",
     "start": "npm run clean && npm run watch",
-    "css": "node-sass ./src/index.scss ./dist/index.css",
-    "build": "npm run clean && npm run css && babel ./src/parallax-hover.js -o ./dist/index.js",
+    "css": "./node_modules/.bin/node-sass ./src/index.scss ./dist/index.css",
+    "build": "npm run clean && npm run css && ./node_modules/.bin/babel ./src/parallax-hover.js -o ./dist/index.js",
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
