@@ -21,18 +21,20 @@ export default class ParallaxHover extends React.Component {
     this.state = {
       rotateX: 0,
       rotateY: 0,
-      movement: 0,
+      shadowMovement: 0,
+      shadowSize: 50,
       scale: 1,
       angle: 0,
       alpha: 0
     };
   }
 
-  __buildState(rotateX, rotateY, movement, scale, angle, alpha) {
+  __buildState(rotateX, rotateY, shadowMovement, shadowSize, scale, angle, alpha) {
     this.setState({
       rotateX: rotateX,
       rotateY: rotateY,
-      movement: movement,
+      shadowMovement: shadowMovement,
+      shadowSize: shadowSize,
       scale: scale,
       angle: angle,
       alpha: alpha
@@ -58,33 +60,49 @@ export default class ParallaxHover extends React.Component {
     return current / max * config.alpha;
   }
 
-  __handleMouseMove(event) {
-    const nativeEvent = event.nativeEvent;
-    const bounds = nativeEvent.target.getBoundingClientRect();
+  __handleMouseMove({ pageX, pageY, nativeEvent}) {
+    const width = this.props.width;
+    const height = this.props.height;
+    const { scrollTop: scrollTop, scrollLeft: scrollLeft } = document.body;
+
+    const bounds = this.refs.wrapper.getBoundingClientRect();
     const centerX = this.props.width / 2;
     const centerY = this.props.height / 2;
-    const offsetX = nativeEvent.offsetX;
-    const offsetY = nativeEvent.offsetY;
-    const deltaX = offsetX - centerX;
-    const deltaY = offsetY - centerY;
-    const rotateX = deltaX / (config.rotation * 100);
-    const rotateY = deltaY / (config.rotation * 100);
-    const movement = nativeEvent.offsetY / bounds.top;
-    const distanceFromCenter = this.__calculateDistance(bounds, offsetX, offsetY);
-    const alpha = this.__calculateAlphaFromCenter(distanceFromCenter);
-    const shadowMovement = movement * config.shadow;
+    const widthMultiplier = 320 / this.props.width;
+
+    const offsetX = 0.52 - (pageX - bounds.left - scrollLeft) / width;
+    const offsetY = 0.52 - (pageY - bounds.top - scrollTop) / height;
+
+    const deltaX = (pageX - bounds.left - scrollLeft) - centerX;
+    const deltaY = (pageY - bounds.top - scrollTop) - centerY;
+    const rotateX = (deltaY - offsetY) * (0.08 * widthMultiplier);
+    const rotateY = (offsetX - deltaX) * (0.04 * widthMultiplier);
     const angleRad = Math.atan2(deltaY, deltaX);
-    let angleDeg = angleRad * 180 / Math.PI - 90;
+    const angleRaw = angleRad * 180 / Math.PI - 90;
+    const angleDeg = angleRaw < 0 ? angleRaw + 360 : angleRaw;
+    const distanceFromCenter = this.__calculateDistance(bounds, nativeEvent.offsetX, nativeEvent.offsetY);
+    const shadowMovement = (nativeEvent.offsetY - bounds.top) * 0.1;
+    const shadowSize = distanceFromCenter / 3;
+    const alpha = this.__calculateAlphaFromCenter(distanceFromCenter);
 
-    if (angleDeg <= 0) {
-      angleDeg = angleDeg + 360;
-    }
+    // console.log(`
+    //   angle:   ${angleDeg}
+    //   pageX:   ${pageX}
+    //   pageY:   ${pageY}
+    //   offsetX: ${offsetX}
+    //   offsetY: ${offsetY}
+    //   deltaX: ${deltaX}
+    //   deltaY: ${deltaY}
+    //   rotateX: ${rotateX}
+    //   rotateY: ${rotateY}
+    //   dfc: ${distanceFromCenter}
+    // `);
 
-    this.__buildState(rotateX, rotateY, shadowMovement, config.scale, angleDeg, alpha);
+    this.__buildState(rotateX, rotateY, shadowMovement, shadowSize, config.scale, angleDeg, alpha);
   }
 
   __handleMouseLeave() {
-    this.__buildState(0, 0, 0, 1, 0, 0);
+    this.__buildState(0, 0, 0, 50, 1, 0, 0);
   }
 
   __renderChildren(children) {
@@ -108,7 +126,7 @@ export default class ParallaxHover extends React.Component {
           textShadow: `${movement}px ${movement}px 20px rgba(0, 0, 0, 0.5)`
         };
 
-        styles = Object.assign(shadow, styles);
+        styles = Object.assign({}, shadow, styles);
       }
 
       return <div style={styles} className='ph-layer' key={key}>{layer}</div>;
@@ -123,19 +141,18 @@ export default class ParallaxHover extends React.Component {
       height: this.props.height
     };
 
-    const stylesShadow = {
-      WebkitTransform: `translateX(${st.movement}) translateY(${st.movement})`,
-      MozTransform: `translateX(${st.movement}) translateY(${st.movement})`,
-      transform: `translateX(${st.movement}) translateY(${st.movement})`
-    };
+    const baseTransforms = this.__buildTransformStrings(st.rotateX, st.rotateY, st.scale);
 
-    const transformLighting = this.__buildTransformStrings(st.rotateX, st.rotateY, st.scale);
-    const stylesLighting = Object.assign(transformLighting, {
+    const stylesShadow = Object.assign({}, baseTransforms, {
+      boxShadow: `0px ${st.shadowMovement}px ${st.shadowSize}px rgba(0, 0, 0, .9)`
+    });
+
+    const stylesLighting = Object.assign({}, baseTransforms, {
       backgroundImage: `linear-gradient(${st.angle}deg, rgba(255,255,255, ${st.alpha}) 0%, rgba(255,255,255,0) 40%)`
     });
 
     return (
-      <figure className='ph-wrapper' style={stylesWrapper} onMouseMove={this.__handleMouseMove.bind(this)} onMouseLeave={this.__handleMouseLeave.bind(this)}>
+      <figure ref='wrapper' className='ph-wrapper' style={stylesWrapper} onMouseMove={this.__handleMouseMove.bind(this)} onMouseLeave={this.__handleMouseLeave.bind(this)}>
         <div className='ph-shadow' style={stylesShadow} />
         {this.__renderChildren(this.props.children)}
         <div className='ph-lighting' style={stylesLighting} />
