@@ -20,7 +20,7 @@ import ParallaxHover from 'react-parallax-hover';
 
 <ParallaxHover width='500' height='500'>
     <img ref='image' src='...' />
-    <h1 ref='text'>Some text</h1>
+    <div ref='text'>Some text</div>
 </ParallaxHover>
 ```
 
