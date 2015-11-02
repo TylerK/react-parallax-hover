@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -25,19 +26,13 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!sass-loader')
       }
     ]
   },
-  externals: [
-    {
-      react: {
-        root: 'React', amd: 'react', commonjs: 'react', commonjs2: 'react'
-      }
-    }
-  ],
   plugins: [
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('index.css')
   ],
   sassLoader: {
     includePaths: [path.resolve(__dirname, './src')]
