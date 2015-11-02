@@ -6,6 +6,9 @@ Pull requests and suggestions more than welcome :]
 ### Install
 `npm install --save react-parallax-hover`
 
+### Demo
+http://codepen.io/TylerK/full/Gpdqqq
+
 ### Run the example locally
 ```
 git clone https://github.com/tylerk/react-parallax-hover/
