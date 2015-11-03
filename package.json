@@ -1,10 +1,16 @@
 {
   "name": "react-parallax-hover",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/TylerK/react-parallax-hover.git"
   },
+  "keywords": [
+    "react",
+    "react-component",
+    "parallax",
+    "hover"
+  ],
   "description": "A pointer driven hover effect that rotates images in place with subtle parallax effects",
   "main": "./dist/index.js",
   "scripts": {
