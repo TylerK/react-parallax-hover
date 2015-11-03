@@ -6,7 +6,7 @@
     "url": "https://github.com/TylerK/react-parallax-hover.git"
   },
   "description": "A pointer driven hover effect that rotates images in place with subtle parallax effects",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
     "watch": "webpack-dev-server --hot --colors",
