@@ -6,6 +6,9 @@ Pull requests and suggestions more than welcome :]
 ### Install
 `npm install --save react-parallax-hover`
 
+### Demo
+http://codepen.io/TylerK/full/Gpdqqq
+
 ### Run the example locally
 ```
 git clone https://github.com/tylerk/react-parallax-hover/
@@ -17,11 +20,10 @@ npm start
 ### Usage
 ```
 import ParallaxHover from 'react-parallax-hover';
-import 'react-parallax-hover/index.css';
 
 <ParallaxHover width='500' height='500'>
     <img ref='image' src='...' />
-    <h1 ref='text'>Some text</h1>
+    <div ref='text'>Some text</div>
 </ParallaxHover>
 ```
 
