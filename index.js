@@ -165,8 +165,6 @@ export default class ParallaxHover extends Component {
     const { angle, shine, shadowMovement, shadowSize } = this.state;
     const { borderRadius, width, height } = this.props;
 
-    console.log(this.state);
-
     // Styles that need to be recalculated on render
     // Or passed in from props
     const _styles = {
