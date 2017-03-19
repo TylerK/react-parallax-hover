@@ -40,8 +40,7 @@ import ParallaxHover from 'react-parallax-hover';
 * Default: `5`
 
 **speed**
-* Type: `Number` in milliseconds
-* Default: `300`
+TODO
 
 **borderRadius**
 * Type: `Number` in pixels
