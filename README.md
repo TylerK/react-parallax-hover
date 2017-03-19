@@ -11,7 +11,7 @@ http://codepen.io/TylerK/full/Gpdqqq
 ```
 import ParallaxHover from 'react-parallax-hover';
 
-<ParallaxHover width="500" height="500">
+<ParallaxHover width={500} height={500}>
     [...]
 </ParallaxHover>
 ```
