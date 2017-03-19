@@ -95,10 +95,6 @@ export default class ParallaxHover extends Component {
     return current / max * shine;
   }
 
-  handleParallaxState = () => {
-    this.setState({ scale: this.props.scale });
-  }
-
   handleParallaxEnd = () => {
     this.setState(initialState);
   }
