@@ -150,6 +150,7 @@ export default class ParallaxHover extends Component {
       );
     }
 
+
     return children.map((layer, key) => {
       const depth = key + 0.1;
       const _styles = {

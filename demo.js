@@ -9,6 +9,7 @@ class ExampleComponent extends Component {
       justifyContent: 'center',
       alignItems: 'center',
       fontWeight: 'bold',
+      fontSize: '2rem',
       color: '#fff',
       height: '100%',
       overflow: 'hidden',
@@ -39,7 +40,7 @@ class Example extends Component {
           borderRadius={8}
         >
           <ExampleComponent>
-            <img width="100%" src="http://www.placecage.com/200/200" />
+            <img width="100%" src="http://www.lorempixel.com/200/200" />
           </ExampleComponent>
         </ParallaxHover>
         <ParallaxHover
@@ -48,7 +49,7 @@ class Example extends Component {
           borderRadius={8}
         >
           <ExampleComponent>
-            <img width="100%" src="http://www.placecage.com/220/220" />
+            <img width="100%" src="http://www.lorempixel.com/220/220" />
           </ExampleComponent>
         </ParallaxHover>
         <ParallaxHover
@@ -57,7 +58,7 @@ class Example extends Component {
           borderRadius={8}
         >
           <ExampleComponent>
-            <img width="100%" src="http://www.placecage.com/240/240" />
+            <img width="100%" src="http://www.lorempixel.com/240/240" />
           </ExampleComponent>
         </ParallaxHover>
       </div>
