@@ -1,5 +1,5 @@
-#Parallax Hover React Component
-Inspired by @drewwilson’s [atvImg](https://github.com/drewwilson/atvImg).
+# Parallax Hover React Component
+Inspired by @drewwilson’s [atvImg](https://github.com/drewwilson/atvImg). Supports multiple layers.
 
 ### Install
 `npm install react-parallax-hover --save-dev `
