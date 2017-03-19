@@ -1,12 +1,13 @@
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+  cache: true,
+  devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
-    './src/example.js'
+    './demo.js'
   ],
   output: {
     path: __dirname + '/dist',
@@ -30,8 +31,17 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    compress: true,
+    historyApiFallback: true,
+    host: '0.0.0.0',
+    hot: true,
+    port: 9001,
+    inline: true,
+  },
   plugins: [
     new webpack.NoErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('index.css')
   ],
   sassLoader: {

@@ -1,13 +1,51 @@
 #Parallax Hover React Component
-Inspired by @drewwilson’s [atvImg](https://github.com/drewwilson/atvImg), ported to React. Allows for non image based layers. Currently only supports mouse events. 
-
-Pull requests and suggestions more than welcome :]
+Inspired by @drewwilson’s [atvImg](https://github.com/drewwilson/atvImg).
 
 ### Install
-`npm install --save react-parallax-hover`
+`npm install react-parallax-hover --save-dev `
 
 ### Demo
 http://codepen.io/TylerK/full/Gpdqqq
+
+### Usage
+```
+import ParallaxHover from 'react-parallax-hover';
+
+<ParallaxHover width="500" height="500">
+    [...]
+</ParallaxHover>
+```
+
+### Configuration
+
+**children** <small>(required)</small>
+* Type: `Any`
+
+**width** <small>(required)</small>
+* Type: `Number`
+* Default: `200`
+
+**height** <small>(required)</small>
+* Type: `Number`
+* Default: `200`
+
+**rotation**
+* Type: `Number`
+* Range: `1 - 9`
+* Default: `5`
+
+**scale**
+* Type: `Number`
+* Range: `1 - 9`
+* Default: `5`
+
+**speed**
+* Type: `Number` in milliseconds
+* Default: `300`
+
+**borderRadius**
+* Type: `Number` in pixels
+* Default: `0`
 
 ### Run the example locally
 ```
@@ -16,19 +54,3 @@ cd react-parallax-hover
 npm install
 npm start
 ```
-
-### Usage
-```
-import ParallaxHover from 'react-parallax-hover';
-
-<ParallaxHover width='500' height='500'>
-    <img ref='image' src='...' />
-    <div ref='text'>Some text</div>
-</ParallaxHover>
-```
-
-### TODOs
-- [ ] More robust configuration
-- [ ] Touch event handling
-- [ ] Github pages site with examples and demo's
-- [ ] Animated gif hotness for this readme
