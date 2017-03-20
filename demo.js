@@ -37,28 +37,33 @@ class Example extends Component {
         <ParallaxHover
           width={200}
           height={200}
-          borderRadius={8}
+          borderRadius={10}
+          rotation={3}
+          shine={3}
         >
           <ExampleComponent>
-            <img width="100%" src="http://www.lorempixel.com/200/200" />
+            <img src="http://lorempixel.com/200/200/" alt=""/>
           </ExampleComponent>
         </ParallaxHover>
+
         <ParallaxHover
           width={200}
           height={200}
-          borderRadius={8}
+          rotation={9}
         >
           <ExampleComponent>
-            <img width="100%" src="http://www.lorempixel.com/220/220" />
+            <img src="http://lorempixel.com/220/220/" alt=""/>
           </ExampleComponent>
         </ParallaxHover>
+
         <ParallaxHover
           width={200}
           height={200}
-          borderRadius={8}
+          borderRadius={33}
+          shine={9}
         >
           <ExampleComponent>
-            <img width="100%" src="http://www.lorempixel.com/240/240" />
+            <img src="http://lorempixel.com/240/240/" alt=""/>
           </ExampleComponent>
         </ParallaxHover>
       </div>
