@@ -3,7 +3,7 @@ import { StyleSheet, css } from 'aphrodite/no-important';
 
 const baseStyles = {
   transition: {
-    transition: 'all 222ms ease-out',
+    transition: 'transform 180ms linear',
   },
   layers: {
     width: '100%',
@@ -18,14 +18,15 @@ const baseStyles = {
 
 const styles = StyleSheet.create({
   parallaxHover__outter: {
+    transform: `perspective(1000px)`,
     transformStyle: 'preserve-3d',
     position: 'relative',
     overflow: 'visible',
     ...baseStyles.transition,
   },
-  parallaxHover__wrapper: {
-    overflow: 'hidden',
-    ...baseStyles.layers,
+  parallaxHover__container: {
+    transform: `perspective(1000px)`,
+    transformStyle: 'preserve-3d',
   },
   parallaxHover__shadow: {
     position: 'absolute',
@@ -33,21 +34,22 @@ const styles = StyleSheet.create({
     height: '80%',
     left: '10%',
     top: '10%',
+    ...baseStyles.transition,
   },
   parallaxHover__layer: {
     overflow: 'hidden',
     ...baseStyles.layers,
+    ...baseStyles.transition,
   },
   parallaxHover__lighting: {
     ...baseStyles.layers,
+    ...baseStyles.transition,
   },
 });
 
 const initialState = {
   rotateX: 0,
   rotateY: 0,
-  shadowMovement: 0,
-  shadowSize: 0,
   scale: 1,
   shine: 0,
   isHovered: false,
@@ -65,15 +67,18 @@ export default class ParallaxHover extends Component {
   }
 
   buildTransformStrings(depth = 0) {
-    const { rotateX, rotateY } = this.state;
+    const { isHovered, rotateX, rotateY, scale } = this.state;
 
+    const scaleModifier = isHovered ? scale * 10 : 1;
     const rotationXModifier = rotateX + depth;
     const rotationYModifier = rotateY + depth;
 
     return {
-      WebkitTransform: `rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
-      MozTransform: `rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
-      transform: `rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`
+      WebkitTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      MozTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      MsTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      OTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      transform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
     };
   }
 
@@ -122,22 +127,21 @@ export default class ParallaxHover extends Component {
     const angleRad = Math.atan2(deltaY, deltaX);
     const angleRaw = angleRad * 180 / Math.PI - 90;
     const angle = angleRaw < 0 ? angleRaw + 360 : angleRaw;
-    const shadowMovement = centerY * 0.25;
-    const shadowSize = 110;
 
     this.setState({
       angle,
       rotateX,
       rotateY,
       scale,
-      shadowMovement,
-      shadowSize,
     });
   }
 
   renderLayers() {
-    const { borderRadius, children } = this.props;
+    const { borderRadius, children, height, width } = this.props;
+
     const _styles = {
+      height: `${height}px`,
+      width: `${width}px`,
       borderRadius: `${borderRadius}px`,
       ...this.buildTransformStrings(),
     };
@@ -167,32 +171,31 @@ export default class ParallaxHover extends Component {
   }
 
   render() {
-    const { angle, isHovered, scale, shadowMovement, shadowSize, shine } = this.state;
-    const { borderRadius, width, height } = this.props;
+    const { angle, isHovered, shine, rotateX } = this.state;
+    const { borderRadius, shadow, width, height } = this.props;
 
-    const scaleModifier = isHovered ? (1 + scale / 50) : 1;
+    const shadowAlphaModifier = shadow >= 10 ? 1 : `0.${shadow}`;
+    const shadowPositionModifier = isHovered ? (rotateX + shadow * shadow / 2) : 0;
+    const shadowBlurModifier = isHovered ? (shadow * 12) : 0;
 
     // Styles that need to be recalculated on render or passed in from props
     const _styles = {
       overlay: {
         width: `${width}px`,
         height: `${height}px`,
-        transform: `scale(${scaleModifier}) perspective(1000px)`
       },
-      wrapper: {
-        height: `${height}px`,
-        width: `${width}px`,
-        borderRadius: `${borderRadius}px`,
-        ...this.buildTransformStrings(),
-      },
+
+      // TODO Why the fuck isn't light shine displaying?!
       lighting: {
         backgroundImage: `linear-gradient(${angle}deg, rgba(255,255,255, ${shine / 10}) 0%, rgba(255,255,255,0) 50%)`,
         borderRadius: `${borderRadius}px`,
         ...this.buildTransformStrings(),
       },
+
+      // TODO Fix shadows not showing up when supplied a large border radius
       shadow: {
         borderRadius: `${borderRadius}px`,
-        boxShadow: `0px ${shadowMovement}px ${shadowSize}px rgba(0, 0, 0, 0.5)`,
+        boxShadow: `0px ${shadowPositionModifier}px ${shadowBlurModifier}px rgba(0, 0, 0, ${shadowAlphaModifier})`,
         ...this.buildTransformStrings(),
       },
     };
@@ -207,13 +210,10 @@ export default class ParallaxHover extends Component {
         onTouchMove={this.handleParallaxEnd}
         onTouchEnd={this.handleParallaxMove}
         style={_styles.overlay}
+        ref={(wrapper) => { this.wrapper = wrapper; }}
       >
         <div className={css(styles.parallaxHover__shadow)} style={_styles.shadow} />
-        <div
-          className={css(styles.parallaxHover__wrapper)}
-          style={_styles.wrapper}
-          ref={(wrapper) => { this.wrapper = wrapper; }}
-        >
+        <div className={css(styles.parallaxHover__container)}>
           { this.renderLayers() }
           <div className={css(styles.parallaxHover__lighting)} style={_styles.lighting} />
         </div>
@@ -226,6 +226,7 @@ ParallaxHover.defaultProps = {
   speed: 100,       // How fast the item scales up and down in MS
   scale: 6,         // How large to scale the item
   rotation: 8,      // Rotation modifier
+  shadow: 5,        // Shadow darkness modifier
   shine: 5,         // Light shine brightness modifer
   height: 200,      // Default height
   width: 200,       // Default width
@@ -238,7 +239,7 @@ ParallaxHover.propTypes = {
   height: PropTypes.number.isRequired,
 
   // Optional Proptypes
-  speed: PropTypes.number,
+  shadow: PropTypes.number,
   scale: PropTypes.number,
   rotation: PropTypes.number,
   shine: PropTypes.number,
