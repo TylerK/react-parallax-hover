@@ -5,7 +5,7 @@ const baseStyles = {
   transition: {
     transition: 'transform 180ms linear',
   },
-  layers: {
+  layer: {
     width: '100%',
     height: '100%',
     position: 'absolute',
@@ -20,13 +20,12 @@ const styles = StyleSheet.create({
   parallaxHover__outter: {
     transform: `perspective(1000px)`,
     transformStyle: 'preserve-3d',
+    backfaceVisibility: 'visible',
     position: 'relative',
     overflow: 'visible',
     ...baseStyles.transition,
   },
   parallaxHover__container: {
-    transform: `perspective(1000px)`,
-    transformStyle: 'preserve-3d',
   },
   parallaxHover__shadow: {
     position: 'absolute',
@@ -38,11 +37,11 @@ const styles = StyleSheet.create({
   },
   parallaxHover__layer: {
     overflow: 'hidden',
-    ...baseStyles.layers,
+    ...baseStyles.layer,
     ...baseStyles.transition,
   },
   parallaxHover__lighting: {
-    ...baseStyles.layers,
+    ...baseStyles.layer,
     ...baseStyles.transition,
   },
 });
@@ -69,16 +68,23 @@ export default class ParallaxHover extends Component {
   buildTransformStrings(depth = 0) {
     const { isHovered, rotateX, rotateY, scale } = this.state;
 
-    const scaleModifier = isHovered ? scale * 10 : 1;
+    // const scaleModifier = isHovered ? scale * 10 : 1;
+    const scaleModifier = isHovered ? (1 + scale / 100) : 1;
     const rotationXModifier = rotateX + depth;
     const rotationYModifier = rotateY + depth;
 
     return {
-      WebkitTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
-      MozTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
-      MsTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
-      OTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
-      transform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      // WebkitTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      // MozTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      // MsTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      // OTransform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      // transform: `translate3d(0,0,${scaleModifier}px) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+
+      WebkitTransform: `scale(${scaleModifier}) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      MozTransform: `scale(${scaleModifier}) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      MsTransform: `scale(${scaleModifier}) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      OTransform: `scale(${scaleModifier}) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
+      transform: `scale(${scaleModifier}) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`,
     };
   }
 
