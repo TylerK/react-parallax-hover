@@ -11,9 +11,13 @@ const ExampleWrapper = styled.div`
 `;
 
 const TextExample = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: sans-serif;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 3rem;
   color: #fff;
 `;
 
@@ -27,7 +31,7 @@ export const kitchenSink = () => {
         height={number('Height', 300)}
         borderRadius={number('Border Radius', 12)}
         rotation={number('Rotation Amount', 3)}
-        shine={number('Light Shine', 2)}
+        shine={number('Light Shine', 0.5)}
         shadow={number('Shadow Depth', 3)}
       >
         <img src="http://placekitten.com/500/300/" alt="Demo image" />
