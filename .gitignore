@@ -7,3 +7,4 @@ lib
 tmp-bower-repo
 .sass-cache
 dist
+*.log
