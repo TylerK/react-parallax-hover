@@ -1,6 +1,6 @@
-# Parallax Hover React Component
+# React Parallax Hover
 
-Inspired by Apple TV's glorious overlay effects, and the amazing talented [@drewwilson’s](http://drewwilson.com/) [atvImg](https://github.com/drewwilson/atvImg) plugin.
+This is a 4kb (gzipped) component inspired by Apple TV's beautiful overlay effects, and the amazingly talented [@drewwilson’s](http://drewwilson.com/) [atvImg](https://github.com/drewwilson/atvImg) work.
 
 # Demo
 
@@ -8,9 +8,18 @@ https://tylerk.gihub.io/react-parallax-hover/
 
 # Install
 
+You will need the following versions listed as a dependency in your project:
+
+- `react @ 16.8.x`
+- `react-dom @ 16.8.x`
+
+Install:
+
 ```
 $ yarn add react-parallax-hover
+
 - or -
+
 $ npm install react-parallax-hover
 ```
 
@@ -24,10 +33,11 @@ import { ParallaxHover } from 'react-parallax-hover';
 </ParallaxHover>
 ```
 
-# Configuration
+# Options
 
-**children** `required`
+`children`
 
+- Required: `true`
 - Type: `Any`
 
 Component will accept a single child, or a flat array of children.
@@ -36,27 +46,29 @@ Component will accept a single child, or a flat array of children.
 
 ---
 
-**width** `required`
+`width`
 
-- Type: `Number`
+- Required: `true`
+- Type: `number`
+- Default: `200`
+
+> Note: Currently only accepts values to be used as pixels. This component does not accept percentages, em, rem, etc...
+
+---
+
+`height`
+
+- Required: `true`
+- Type: `number`
 - Default: `200`
 
 > Note: Currently does not accept a percentage, or relative height
 
 ---
 
-**height** `required`
+`rotation`
 
-- Type: `Number`
-- Default: `200`
-
-> Note: Currently does not accept a percentage, or relative height
-
----
-
-**rotation**
-
-- Type: `Number`
+- Type: `number`
 - Range: `0 - 9`
 - Default: `5`
 
@@ -64,9 +76,9 @@ Adjust the exaggeration of the rotation on pointer move.
 
 ---
 
-**shadow**
+`shadow`
 
-- Type: `Number`
+- Type: `number`
 - Range: `0 - 9`
 - Default: `5`
 
@@ -74,18 +86,24 @@ Adjusts the darkness of the shadow.
 
 ---
 
-**borderRadius**
+`borderRadius`
 
-- Type: `Number` in pixels
+- Type: `number` in pixels
 - Default: `0`
 
 ---
 
-### Run the example locally
+# How To Contribute
+
+Run the following after forking this repo:
 
 ```
-$ git clone https://github.com/tylerk/react-parallax-hover/
+$ git clone https://github.com/<your username>/react-parallax-hover/
 $ cd react-parallax-hover
 $ yarn
 $ yarn start
 ```
+
+You should see a Storybook instance open up in your default browser.
+
+Happy hacking, and feel free to issue PR's against this repo.
