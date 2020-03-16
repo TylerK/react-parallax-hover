@@ -1,94 +1,109 @@
-# Parallax Hover React Component
-Inspired by Apple TV's glorious overlay effects, and @drewwilson’s [atvImg](https://github.com/drewwilson/atvImg) plugin. 
+# React Parallax Hover
 
-`react-parallax-hover` supports configuration options, and multiple layers. 
-
-# Install
-`npm install react-parallax-hover --save-dev `
+This is a 4kb (gzipped) component inspired by Apple TV's beautiful overlay effects, and the amazingly talented [@drewwilson’s](http://drewwilson.com/) [atvImg](https://github.com/drewwilson/atvImg) work.
 
 # Demo
-http://codepen.io/TylerK/full/Gpdqqq
+
+https://tylerk.gihub.io/react-parallax-hover/
+
+# Install
+
+You will need the following versions listed as a dependency in your project:
+
+- `react @ 16.8.x`
+- `react-dom @ 16.8.x`
+
+Install:
+
+```
+$ yarn add react-parallax-hover
+
+- or -
+
+$ npm install react-parallax-hover
+```
 
 # Usage
+
 ```
-import ParallaxHover from 'react-parallax-hover';
+import { ParallaxHover } from 'react-parallax-hover';
 
 <ParallaxHover width={500} height={500}>
-    [...]
+    ...
 </ParallaxHover>
 ```
 
-# Configuration
+# Options
 
-**children** `required`
-* Type: `Any`
+`children`
 
-Component will accept a single child, or a flat array of children. 
+- Required: `true`
+- Type: `Any`
+
+Component will accept a single child, or a flat array of children.
 
 > Note: While this will 'layer' the parallax effect per-child, you will typiclaly see diminishing returns after two or three components.
 
 ---
 
-**width** `required`
-* Type: `Number`
-* Default: `200`
+`width`
 
-> Note: Currently does not accept a percentage, or relative height 
+- Required: `true`
+- Type: `number`
+- Default: `200`
 
----
-
-**height** <small>(required)</small>
-* Type: `Number`
-* Default: `200`
-
-> Note: Currently does not accept a percentage, or relative height 
+> Note: Currently only accepts values to be used as pixels. This component does not accept percentages, em, rem, etc...
 
 ---
 
-**rotation**
-> blah blah 
+`height`
 
-* Type: `Number`
-* Range: `0 - 9`
-* Default: `5`
+- Required: `true`
+- Type: `number`
+- Default: `200`
+
+> Note: Currently does not accept a percentage, or relative height
+
+---
+
+`rotation`
+
+- Type: `number`
+- Range: `0 - 9`
+- Default: `5`
 
 Adjust the exaggeration of the rotation on pointer move.
 
 ---
 
-**shadow**
-* Type: `Number`
-* Range: `0 - 9`
-* Default: `5`
+`shadow`
 
-Adjusts the darkness of the shadow. 
+- Type: `number`
+- Range: `0 - 9`
+- Default: `5`
 
----
-
-**scale**
-* Type: `Number`
-* Range: `1 - 9`
-* Default: `5`
-
-Adjusts how large the component will grow. 
+Adjusts the darkness of the shadow.
 
 ---
 
-**speed**
-* TODO
+`borderRadius`
+
+- Type: `number` in pixels
+- Default: `0`
 
 ---
 
-**borderRadius**
-* Type: `Number` in pixels
-* Default: `0`
+# How To Contribute
 
----
+Run the following after forking this repo:
 
-### Run the example locally
 ```
-git clone https://github.com/tylerk/react-parallax-hover/
-cd react-parallax-hover
-npm install
-npm start
+$ git clone https://github.com/<your username>/react-parallax-hover/
+$ cd react-parallax-hover
+$ yarn
+$ yarn start
 ```
+
+You should see a Storybook instance open up in your default browser.
+
+Happy hacking, and feel free to issue PR's against this repo.

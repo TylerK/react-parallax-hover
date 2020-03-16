@@ -1,6 +1,6 @@
 {
   "name": "react-parallax-hover",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/TylerK/react-parallax-hover.git"
@@ -14,40 +14,37 @@
   "description": "A pointer driven hover effect that rotates images in place with subtle parallax effects",
   "main": "./dist/index.js",
   "scripts": {
+    "build": "yarn clean && babel src/index.jsx -o dist/index.js",
     "clean": "rm -rf ./dist && mkdir ./dist",
-    "start": "npm run clean && webpack-dev-server --inline",
-    "build": "npm run clean && ./node_modules/.bin/babel index.js -o dist/index.js",
-    "prepublish": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "yarn build",
+    "deploy": "storybook-to-ghpages",
+    "start": "start-storybook"
   },
   "author": "Tyler Kelley <tylerckelley@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "aphrodite": "^1.2.0",
-    "autoprefixer-loader": "^3.1.0",
-    "babel": "^6.0.14",
-    "babel-cli": "^6.0.15",
-    "babel-core": "^6.0.14",
-    "babel-eslint": "^4.1.3",
-    "babel-loader": "^6.0.0",
-    "babel-plugin-transform-class-properties": "^6.23.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.0.14",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015": "^6.0.14",
-    "babel-preset-react": "^6.0.14",
-    "css-loader": "^0.21.0",
-    "eslint": "^1.7.3",
-    "eslint-config-airbnb": "^0.1.0",
-    "eslint-plugin-import": "^0.8.1",
-    "eslint-plugin-react": "^3.6.3",
-    "extract-text-webpack-plugin": "^0.8.2",
-    "node-sass": "^3.4.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-hot-loader": "^1.3.0",
-    "sass-loader": "^3.1.1",
-    "style-loader": "^0.13.0",
-    "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.16.3"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "@storybook/addon-knobs": "^5.3.17",
+    "@storybook/addons": "^5.3.17",
+    "@storybook/react": "^5.3.17",
+    "@storybook/storybook-deployer": "^2.8.3",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "@types/styled-components": "^5.0.1",
+    "babel-loader": "^8.0.6"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "styled-components": "^5.0.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.x",
+    "react-dom": "^16.8.x"
   }
 }

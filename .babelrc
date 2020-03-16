@@ -1,8 +1,7 @@
 {
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
   "plugins": [
-    "transform-class-properties",
-    "transform-es2015-modules-commonjs",
-    "transform-object-rest-spread"
-  ],
-  "presets": ["react", "es2015"]
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
 }
