@@ -16,6 +16,7 @@
   "scripts": {
     "build": "yarn clean && babel src/index.jsx -o dist/index.js",
     "clean": "rm -rf ./dist && mkdir ./dist",
+    "prepublish": "yarn build",
     "deploy": "storybook-to-ghpages",
     "start": "start-storybook"
   },
