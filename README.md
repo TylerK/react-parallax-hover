@@ -4,7 +4,7 @@ Inspired by Apple TV's glorious overlay effects, and the amazing talented [@drew
 
 # Demo
 
-http://codepen.io/TylerK/full/Gpdqqq
+https://tylerk.gihub.io/react-parallax-hover/
 
 # Install
 

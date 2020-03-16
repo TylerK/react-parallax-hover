@@ -14,10 +14,10 @@
   "description": "A pointer driven hover effect that rotates images in place with subtle parallax effects",
   "main": "./dist/index.js",
   "scripts": {
-    "clean": "rm -rf ./dist && mkdir ./dist",
-    "start": "start-storybook",
     "build": "npm run clean && ./node_modules/.bin/babel src/index.js -o dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf ./dist && mkdir ./dist",
+    "deploy": "storybook-to-ghpages",
+    "start": "start-storybook"
   },
   "author": "Tyler Kelley <tylerckelley@gmail.com>",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "@babel/preset-react": "^7.8.3",
     "@storybook/addon-knobs": "^5.3.17",
     "@storybook/react": "^5.3.17",
+    "@storybook/storybook-deployer": "^2.8.3",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",

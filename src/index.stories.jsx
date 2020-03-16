@@ -21,6 +21,13 @@ const TextExample = styled.div`
   color: #fff;
 `;
 
+const rangeOptions = {
+  range: true,
+  min: 0,
+  max: 9,
+  step: 1,
+};
+
 export default { title: 'Parallax Hover', decorators: [withKnobs] };
 
 export const kitchenSink = () => {
@@ -30,11 +37,12 @@ export const kitchenSink = () => {
         width={number('Width', 500)}
         height={number('Height', 300)}
         borderRadius={number('Border Radius', 12)}
-        rotation={number('Rotation Amount', 3)}
-        shine={number('Light Shine', 0.5)}
-        shadow={number('Shadow Depth', 3)}
+        rotation={number('Rotation Amount', 3, rangeOptions)}
+        shine={number('Light Shine', 3, rangeOptions)}
+        scale={number('Scale', 2, rangeOptions)}
+        shadow={number('Shadow Depth', 3, rangeOptions)}
       >
-        <img src="http://placekitten.com/500/300/" alt="Demo image" />
+        <img src="//placekitten.com/500/300/" alt="Demo image" />
         <TextExample>Hello There</TextExample>
       </ParallaxHover>
     </ExampleWrapper>

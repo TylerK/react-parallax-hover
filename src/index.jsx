@@ -161,33 +161,33 @@ export class ParallaxHover extends Component {
     const { angle, isHovered, shine, rotateX } = this.state;
     const { children, borderRadius, shadow, width, height } = this.props;
 
-    const shadowPositionModifier = isHovered ? rotateX + (shadow * shadow) / 2 : 0;
-    const shadowBlurModifier = isHovered ? shadow * 12 : 0;
-    const lightingAlphaModifier = isHovered ? 1 : 0;
+    const shadowPositionModifier = rotateX + (shadow * shadow) / 2;
+    const shadowBlurModifier = shadow * 20;
+    const opacityModifier = isHovered ? 1 : 0;
+    const lightingShineModifier = shine * 0.1;
 
     const wrapperStyles = {
       ...this.buildTransitionTimingString(1),
-      ...this.buildTransformStrings(1),
       width,
       height,
     };
 
+    // prettier-ignore
     const shadowStyles = {
       ...this.buildTransitionTimingString(2),
-      ...this.buildTransformStrings(2),
       borderRadius: borderRadius + 'px',
-      opacity: lightingAlphaModifier,
+      opacity: opacityModifier,
       boxShadow: `
         0px ${shadowPositionModifier}px ${shadowBlurModifier}px rgba(0, 0, 0, 0.5),
-        0px ${shadowPositionModifier / 2}px ${shadowBlurModifier / 2}px 5px rgba(0, 0, 0, 0.5)`,
+        0px ${shadowPositionModifier * 0.33}px ${shadowBlurModifier * 0.33}px 5px rgba(0, 0, 0, 0.5)`,
     };
 
     const lightingStyles = {
       ...this.buildTransitionTimingString(children.length),
       ...this.buildTransformStrings(children.length),
       borderRadius: borderRadius + 'px',
-      opacity: lightingAlphaModifier,
-      backgroundImage: `linear-gradient(${angle}deg, rgba(255,255,255, ${shine}) 0%, rgba(255,255,255,0) 80%)`,
+      opacity: opacityModifier,
+      backgroundImage: `linear-gradient(${angle}deg, rgba(255,255,255, ${lightingShineModifier}) 0%, rgba(255,255,255,0) 80%)`,
     };
 
     return (
