@@ -10,14 +10,20 @@ const ExampleWrapper = styled.div`
   height: calc(100vh - 30px);
 `;
 
+const ImageExample = styled.div`
+  height: 100%;
+  background-color: tomato;
+`;
+
 const TextExample = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
-  font-weight: bold;
+  font-weight: lighter;
   font-size: 3rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
   color: #fff;
 `;
 
@@ -42,7 +48,9 @@ export const kitchenSink = () => {
         scale={number('Scale', 2, rangeOptions)}
         shadow={number('Shadow Depth', 3, rangeOptions)}
       >
-        <img src="//placekitten.com/500/300/" alt="Demo image" />
+        <ImageExample>
+          <img src="//lorempixel.com/500/300/abstract" alt="Demo image" />
+        </ImageExample>
         <TextExample>Hello There</TextExample>
       </ParallaxHover>
     </ExampleWrapper>

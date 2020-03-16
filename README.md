@@ -74,16 +74,6 @@ Adjusts the darkness of the shadow.
 
 ---
 
-**scale**
-
-- Type: `Number`
-- Range: `0 - 9`
-- Default: `5`
-
-Adjusts how large the component will grow on interaction.
-
----
-
 **borderRadius**
 
 - Type: `Number` in pixels

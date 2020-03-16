@@ -37,6 +37,7 @@
     "babel-loader": "^8.0.6"
   },
   "dependencies": {
+    "@storybook/addons": "^5.3.17",
     "prop-types": "^15.7.2",
     "styled-components": "^5.0.1"
   },

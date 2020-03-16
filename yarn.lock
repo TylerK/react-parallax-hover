@@ -1148,7 +1148,7 @@
     react-lifecycles-compat "^3.0.4"
     react-select "^3.0.8"
 
-"@storybook/addons@5.3.17":
+"@storybook/addons@5.3.17", "@storybook/addons@^5.3.17":
   version "5.3.17"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-5.3.17.tgz#8efab65904040b0b8578eedc9a5772dbcbf6fa83"
   integrity sha512-zg6O1bmffRsHXJOWAnSD2O3tPnVMoD8Yfu+a5zBVXDiUP1E/TGzgjjjYBUUCU3yQg1Ted5rIn4o6ql/rZNNlgA==

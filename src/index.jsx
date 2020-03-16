@@ -3,15 +3,22 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const ParallaxWrapper = styled.div`
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+`;
+
+const ParallaxContainer = styled.div`
   position: relative;
+  width: 100%;
+  height: 100%;
 `;
 
 const ParallaxShadow = styled.div`
   position: absolute;
   width: 95%;
   height: 95%;
-  left: 2.55%;
   top: 2.55%;
+  left: 2.55%;
   background: none;
 `;
 
@@ -66,7 +73,7 @@ export class ParallaxHover extends Component {
     const rotationXModifier = Math.floor(rotateX / depth);
     const rotationYModifier = Math.floor(rotateY / depth);
 
-    const transformString = `perspective(1000px) scale(${scaleModifier}) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`;
+    const transformString = `scale(${scaleModifier}) rotateX(${rotationXModifier}deg) rotateY(${rotationYModifier}deg)`;
 
     return {
       WebkitTransform: transformString,
@@ -137,7 +144,6 @@ export class ParallaxHover extends Component {
       width: `${width}px`,
       borderRadius: `${borderRadius}px`,
       ...this.buildTransitionTimingString(depth),
-      ...this.buildTransformStrings(depth),
     });
 
     if (!Array.isArray(children)) {
@@ -162,14 +168,18 @@ export class ParallaxHover extends Component {
     const { children, borderRadius, shadow, width, height } = this.props;
 
     const shadowPositionModifier = rotateX + (shadow * shadow) / 2;
-    const shadowBlurModifier = shadow * 20;
+    const shadowBlurModifier = 20 + shadow * shadow;
     const opacityModifier = isHovered ? 1 : 0;
     const lightingShineModifier = shine * 0.1;
 
     const wrapperStyles = {
-      ...this.buildTransitionTimingString(1),
       width,
       height,
+    };
+
+    const innerContainerStyles = {
+      ...this.buildTransformStrings(1),
+      ...this.buildTransitionTimingString(1),
     };
 
     // prettier-ignore
@@ -184,7 +194,6 @@ export class ParallaxHover extends Component {
 
     const lightingStyles = {
       ...this.buildTransitionTimingString(children.length),
-      ...this.buildTransformStrings(children.length),
       borderRadius: borderRadius + 'px',
       opacity: opacityModifier,
       backgroundImage: `linear-gradient(${angle}deg, rgba(255,255,255, ${lightingShineModifier}) 0%, rgba(255,255,255,0) 80%)`,
@@ -204,9 +213,11 @@ export class ParallaxHover extends Component {
           this.wrapper = wrapper;
         }}
       >
-        <ParallaxShadow className="parallaxHover__shadow" style={shadowStyles} />
-        {this.renderLayers()}
-        <ParallaxLighting className="parallaxHover__lighting" style={lightingStyles} />
+        <ParallaxContainer style={innerContainerStyles}>
+          <ParallaxShadow className="parallaxHover__shadow" style={shadowStyles} />
+          {this.renderLayers()}
+          <ParallaxLighting className="parallaxHover__lighting" style={lightingStyles} />
+        </ParallaxContainer>
       </ParallaxWrapper>
     );
   }
@@ -215,10 +226,8 @@ export class ParallaxHover extends Component {
 ParallaxHover.defaultProps = {
   /** How fast the item scales up and down in MS */
   speed: 100,
-  /** How large to scale the item */
-  scale: 6,
   /** Rotation modifier */
-  rotation: 8,
+  rotation: 5,
   /** Shadow darkness modifier */
   shadow: 5,
   /** Light shine brightness modifer */
@@ -236,7 +245,6 @@ ParallaxHover.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   shadow: PropTypes.number,
-  scale: PropTypes.number,
   rotation: PropTypes.number,
   shine: PropTypes.number,
   borderRadius: PropTypes.number,
