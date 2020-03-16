@@ -4,7 +4,7 @@ This is a 4kb (gzipped) component inspired by Apple TV's beautiful overlay effec
 
 # Demo
 
-https://tylerk.gihub.io/react-parallax-hover/
+https://tylerk.github.io/react-parallax-hover/
 
 # Install
 
