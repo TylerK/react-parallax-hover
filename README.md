@@ -35,7 +35,7 @@ import { ParallaxHover } from 'react-parallax-hover';
 
 # Options
 
-`children`
+### `children`
 
 - Required: `true`
 - Type: `Any`
@@ -46,7 +46,7 @@ Component will accept a single child, or a flat array of children.
 
 ---
 
-`width`
+### `width`
 
 - Required: `true`
 - Type: `number`
@@ -56,7 +56,7 @@ Component will accept a single child, or a flat array of children.
 
 ---
 
-`height`
+### `height`
 
 - Required: `true`
 - Type: `number`
@@ -66,7 +66,7 @@ Component will accept a single child, or a flat array of children.
 
 ---
 
-`rotation`
+### `rotation`
 
 - Type: `number`
 - Range: `0 - 9`
@@ -76,7 +76,7 @@ Adjust the exaggeration of the rotation on pointer move.
 
 ---
 
-`shadow`
+### `shadow`
 
 - Type: `number`
 - Range: `0 - 9`
@@ -86,7 +86,7 @@ Adjusts the darkness of the shadow.
 
 ---
 
-`borderRadius`
+### `borderRadius`
 
 - Type: `number` in pixels
 - Default: `0`
