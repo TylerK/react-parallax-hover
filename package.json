@@ -1,6 +1,6 @@
 {
   "name": "react-parallax-hover",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/TylerK/react-parallax-hover.git"
@@ -18,33 +18,28 @@
     "clean": "rm -rf ./dist && mkdir ./dist",
     "prepublish": "yarn build",
     "deploy": "storybook-to-ghpages",
-    "start": "start-storybook"
+    "start": "start-storybook -p 3000"
   },
   "author": "Tyler Kelley <tylerckelley@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.7",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
-    "@babel/preset-env": "^7.8.7",
-    "@babel/preset-react": "^7.8.3",
-    "@storybook/addon-knobs": "^5.3.17",
-    "@storybook/addons": "^5.3.17",
-    "@storybook/react": "^5.3.17",
-    "@storybook/storybook-deployer": "^2.8.3",
-    "@types/prop-types": "^15.7.3",
-    "@types/react": "^16.9.23",
-    "@types/react-dom": "^16.9.5",
-    "@types/styled-components": "^5.0.1",
-    "babel-loader": "^8.0.6"
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/react": "^6.1.21",
+    "@storybook/storybook-deployer": "^2.8.10",
+    "@types/prop-types": "^15.7.4",
+    "@types/react": "^16.8.24",
+    "@types/react-dom": "^16.8.5",
+    "@types/styled-components": "^5.1.21",
+    "babel-loader": "^8.2.3"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
-    "styled-components": "^5.0.1"
-  },
-  "peerDependencies": {
-    "react": "^16.8.x",
-    "react-dom": "^16.8.x"
+    "prop-types": "^15.8.1",
+    "react": "^16.8.24",
+    "react-dom": "^16.8.5",
+    "styled-components": "^5.3.3"
   }
 }

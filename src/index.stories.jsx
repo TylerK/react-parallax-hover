@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withKnobs, number } from '@storybook/addon-knobs';
 import { ParallaxHover } from './';
+import Background from '../assets/background.png';
 
 const ExampleWrapper = styled.div`
   display: flex;
@@ -27,32 +27,123 @@ const TextExample = styled.div`
   color: #fff;
 `;
 
+const CardExample = styled.div`
+  width: 220px;
+  height: 300px;
+  box-shadow: 0 0 0 2px grey;
+  background: #eee;
+`;
+
+const Container = styled.div`
+  padding: 1rem;
+  * {
+    font-family: sans-serif;
+    margin: 0;
+  }
+`;
+
 const rangeOptions = {
-  range: true,
   min: 0,
   max: 9,
   step: 1,
 };
 
-export default { title: 'Parallax Hover', decorators: [withKnobs] };
+const initialValues = {
+  radius: 5,
+  rotation: 5,
+  shine: 5,
+  scale: 5,
+  shadow: 5,
+};
 
-export const kitchenSink = () => {
+export default {
+  title: 'Parallax Hover',
+  argTypes: {
+    radius: {
+      control: {
+        type: 'number',
+      },
+    },
+    rotation: {
+      control: {
+        type: 'range',
+        ...rangeOptions,
+      },
+    },
+    shine: {
+      control: {
+        type: 'range',
+        ...rangeOptions,
+      },
+    },
+    scale: {
+      control: {
+        type: 'range',
+        ...rangeOptions,
+      },
+    },
+    shadow: {
+      control: {
+        type: 'range',
+        ...rangeOptions,
+      },
+    },
+  },
+};
+
+export const ImageWithText = (args) => {
   return (
     <ExampleWrapper>
       <ParallaxHover
-        width={number('Width', 500)}
-        height={number('Height', 300)}
-        borderRadius={number('Border Radius', 12)}
-        rotation={number('Rotation Amount', 3, rangeOptions)}
-        shine={number('Light Shine', 3, rangeOptions)}
-        scale={number('Scale', 2, rangeOptions)}
-        shadow={number('Shadow Depth', 3, rangeOptions)}
+        width={args.width}
+        height={args.height}
+        borderRadius={args.radius}
+        rotation={args.rotation}
+        shine={args.shine}
+        scale={args.scale}
+        shadow={args.shadow}
       >
         <ImageExample>
-          <img src="//lorempixel.com/500/300/abstract" alt="Demo image" />
+          <img src={Background} width="500" height="300" alt="Demo image" />
         </ImageExample>
         <TextExample>Hello There</TextExample>
       </ParallaxHover>
     </ExampleWrapper>
   );
+};
+
+ImageWithText.args = {
+  width: 500,
+  height: 300,
+  ...initialValues,
+};
+
+export const SimpleCard = (args) => {
+  return (
+    <ExampleWrapper>
+      <ParallaxHover
+        width={args.width}
+        height={args.height}
+        borderRadius={args.radius}
+        rotation={args.rotation}
+        shine={args.shine}
+        scale={args.scale}
+        shadow={args.shadow}
+      >
+        <CardExample>
+          <img src={Background} width="220" height="220" alt="Demo image" />
+          <Container>
+            <h3>John Doe</h3>
+            <p>Architect &amp; Engineer</p>
+          </Container>
+        </CardExample>
+      </ParallaxHover>
+    </ExampleWrapper>
+  );
+};
+
+SimpleCard.args = {
+  width: 220,
+  height: 300,
+  ...initialValues,
 };
